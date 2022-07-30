@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="15e4f649-7e83-4e03-8779-75f6e7442c7c" name="Xampp" url="http://localhost/Project/Vimmobilier">
+        <fileTransfer mountedRoot="C:\xampp\htdocs\Project\Vimmobilier" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

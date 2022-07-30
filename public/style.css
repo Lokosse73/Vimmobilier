@@ -1,0 +1,236 @@
+html{
+    --black: #393d3fff;
+    --white: #fdfdffff;
+    --SecondColor: #c6c5b9ff;
+    --FirstColor: #62929eff;
+    --BackColor: #546a7bff;
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.visible{
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+.hidden{
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+}
+.NavBar{
+    background-color: var(--BackColor);
+    height: 40px;
+}
+.logo{
+    position: absolute;
+    margin-left: 100px;
+    width: 98px;
+    height: 33px;
+}
+.NavBar nav{
+    display: flex;
+    margin-left: 300px;
+}
+.NavBar nav a{
+    margin-left: 50px;
+    text-decoration: none;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--white);
+}
+.NavBar nav a p{
+    margin: 0;
+    font-size: 18px;
+}
+.NavBar nav a img{
+    visibility: hidden;
+    display: none;
+    color: var(--white);
+}
+.log{
+    margin-left: auto;
+}
+.active p{
+    color: var(--SecondColor);
+}
+.searchBar{
+    background-color: var(--FirstColor);
+    float: left;
+    width: 300px;
+    height: calc(100% - 40px);
+    text-align: center;
+    font-size: 18px;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    transition: left 0.5s ease;
+}
+form input{
+    height: 30px;
+    border: var(--black) solid 1px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.searchBar form input{
+    margin-top: 50px;
+}
+form label{
+    height: 25px;
+    margin-top: 50px;
+    margin-right: 20px;
+}
+.searchBar form input[type="search"]{
+    width: 250px;
+    height: 25px;
+    border: var(--black) solid 1px;
+    border-radius: 50px;
+}
+.searchBar form input[type="number"]{
+    width: 50px;
+    height: 26px;
+}
+.searchBar form input[type="radio"]{
+    width: 25px;
+}
+form input[type="submit"]{
+    cursor:pointer;
+}
+.align{
+    margin-left: 12.5%;
+}
+.flex{
+    display: flex;
+}
+main{
+    margin: 50px 50px 50px 350px;
+}
+.card{
+    border-radius: 5px;
+    height: 200px;
+    transform: scale(1);
+    transition: 0.2s;
+    background-color: var(--SecondColor);
+}
+.card:hover{
+    transform: scale(1.01);
+}
+.card-img{
+    display: block;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    user-select: none;
+    border-radius: 5px 0 0 5px;
+}
+.card div{
+    padding: 5px;
+}
+.card p{
+    margin: 0;
+}
+.card-infoB{
+    margin-left: auto;
+}
+.card-price{
+    float: right;
+}
+
+#ConnectionScreen{
+    position:fixed;
+    top : 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: #00000050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+}
+.ConnectionPanel{
+    width: 350px;
+    overflow: hidden;
+    padding: 10px 25px;
+    background-color: var(--BackColor);
+    border-image-slice: 1;
+    border-width: 3px;
+}
+@media screen and (max-width: 768px){
+    .searchBar{
+        left: -300px;
+    }
+    .log{
+        display: none;
+        visibility: hidden;
+    }
+    .NavBar nav{
+        z-index: 10;
+        position: fixed;
+        bottom: 0;
+        background-color: var(--BackColor);
+        margin-left: 0;
+        width: 100%;
+        justify-content: space-evenly;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .NavBar nav a{
+        visibility: hidden;
+        margin: 0;
+    }
+    .NavBar nav a p{
+        display: none;
+        visibility: hidden;
+        margin: 0;
+    }
+    .NavBar nav a img{
+        visibility: visible;
+        width: 1.2rem;
+        height: 1.2rem;
+        margin: 0;
+        display: block;
+    }
+    .logo{
+        position: unset;
+        margin: auto;
+        width: 98px;
+        height: 33px;
+    }
+
+    main{
+        margin: 0;
+    }
+    .card{
+        border-radius: 5px;
+        height: auto;
+        transform: scale(1);
+        transition: 0.2s;
+        background-color: var(--SecondColor);
+        display: block;
+        margin: 5px;
+    }
+    .card-img{
+        display: block;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        user-select: none;
+        border-radius: 5px 5px 0 0 
+    }
+    .card div{
+        padding: 0;
+    }
+    .card-infoB{
+        display: flex;
+    }
+    .card-price{
+        margin-left: auto;
+        padding: 0;
+    }
+}

@@ -1,0 +1,18 @@
+@media screen and (max-width: 768px){
+  /* Active class */
+  .searchBar.sidShow {
+    left: 0;
+  }
+  /* Icône burger */
+  .burger-icon span {
+    display: block;
+    width: 35px;
+    height: 5px;
+    background-color: var(--black);
+    margin: 6px 0;
+  }
+  #openBtn{
+    left: 10px;
+    position: absolute;
+  }
+}
