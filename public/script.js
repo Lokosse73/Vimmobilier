@@ -14,14 +14,3 @@ function openCloseNav() {
     pos = "close";
   }
 }
-
-function ShowConnection(){
-  var Screen = document.getElementById("ConnectionScreen");
-  Screen.classList.add("visible");
-  Screen.classList.remove("hidden");
-}
-function HideConnection(){
-  var Screen = document.getElementById("ConnectionScreen");
-  Screen.classList.add("hidden");
-  Screen.classList.remove("visible");
-}

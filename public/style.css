@@ -71,21 +71,16 @@ body{
     left: 0;
     transition: left 0.5s ease;
 }
-form input{
+form input, select{
     height: 30px;
     border: var(--black) solid 1px;
     width: 100%;
     box-sizing: border-box;
 }
-.searchBar form input{
+.formSpacer{
     margin-top: 50px;
 }
-form label{
-    height: 25px;
-    margin-top: 50px;
-    margin-right: 20px;
-}
-.searchBar form input[type="search"]{
+.searchBar form select{
     width: 250px;
     height: 25px;
     border: var(--black) solid 1px;
@@ -101,6 +96,9 @@ form label{
 form input[type="submit"]{
     cursor:pointer;
 }
+label p{
+    margin: auto;
+}
 .align{
     margin-left: 12.5%;
 }
@@ -109,39 +107,43 @@ form input[type="submit"]{
 }
 main{
     margin: 50px 50px 50px 350px;
-}
-.card{
-    border-radius: 5px;
-    height: 200px;
-    transform: scale(1);
-    transition: 0.2s;
-    background-color: var(--SecondColor);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 .card:hover{
     transform: scale(1.01);
+}
+.card p{
+    margin: 0;
+}
+.card{
+    border-radius: 5px;
+    height: auto;
+    transform: scale(1);
+    transition: 0.2s;
+    background-color: var(--SecondColor);
+    display: block;
+    margin: 5px;
 }
 .card-img{
     display: block;
     position: relative;
     z-index: 1;
-    height: 100%;
+    width: 100%;
     user-select: none;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px 5px 0 0
 }
 .card div{
-    padding: 5px;
-}
-.card p{
-    margin: 0;
+    padding: 0;
 }
 .card-infoB{
-    margin-left: auto;
+    display: flex;
 }
 .card-price{
-    float: right;
+    margin-left: auto;
+    padding: 0;
 }
-
-#ConnectionScreen{
+.form-comp{
     position:fixed;
     top : 0;
     width: 100%;
@@ -153,13 +155,18 @@ main{
     align-items: center;
     left: 0;
 }
-.ConnectionPanel{
+.form-Panel{
     width: 350px;
     overflow: hidden;
     padding: 10px 25px;
     background-color: var(--BackColor);
     border-image-slice: 1;
     border-width: 3px;
+}
+
+.textButton{
+    cursor: pointer;
+    text-decoration: underline;
 }
 @media screen and (max-width: 768px){
     .searchBar{
@@ -205,32 +212,6 @@ main{
 
     main{
         margin: 0;
-    }
-    .card{
-        border-radius: 5px;
-        height: auto;
-        transform: scale(1);
-        transition: 0.2s;
-        background-color: var(--SecondColor);
         display: block;
-        margin: 5px;
-    }
-    .card-img{
-        display: block;
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        user-select: none;
-        border-radius: 5px 5px 0 0 
-    }
-    .card div{
-        padding: 0;
-    }
-    .card-infoB{
-        display: flex;
-    }
-    .card-price{
-        margin-left: auto;
-        padding: 0;
     }
 }

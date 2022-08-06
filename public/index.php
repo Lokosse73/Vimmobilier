@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Vimmobilier</title>
-      <link rel="stylesheet" href="style.css">
-      <link rel="stylesheet" href="BurgerStyle.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Vimmobilier</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="BurgerStyle.css">
+        <script src="scriptBefore.js"></script>
     </head>
     <header>
         <?php
@@ -14,42 +15,84 @@
     </header>
     <body>
         <div class="searchBar" id="mySidenav">
-            <form action="" method="get">
-                <input type="search" name="city" placeholder="Ville" required>
-                <div>
-                    <label for="PriceMin">Prix :</label>
-                    <input type="number" name="PriceMin" min="0" placeholder="Min">
-                    <input type="number" name="PriceMax" placeholder="Max">
+            <form action="" method="get" class="formSpacer">
+                <?php
+                if (!empty($_GET)){
+                    $department = $_GET["department"];
+                    $priceMin = $_GET["PriceMin"];
+                    $priceMax = $_GET["PriceMax"];
+                    $typeA = $_GET["TypeA"];
+                    $TypeBNum = $_GET["TypeB"];
+                    if($_GET["TypeB"] == 0){
+                        $typeB = "checked";
+                        $typeBB = "";
+                    }else{
+                        $typeBB = "checked";
+                        $typeB = "";
+                    }
+                }else{
+                    $department = "";
+                    $priceMin = "";
+                    $priceMax = "";
+                    $typeA = "0";
+                    $typeB = "checked";
+                    $typeBB = "";
+                }
+                echo "<label>
+                    <select id='select' name='department' required>"; require "Front/department.html"; echo "</select>
+                </label>
+                <div class='formSpacer'>
+                    <label for='PriceMin'>Prix :
+                        <input type='number' name='PriceMin' min='0' value='$priceMin' placeholder='Min'>
+                    </label>
+                    <label>
+                        <input type='number' name='PriceMax' min='0' value='$priceMax' placeholder='Max'>
+                    </label>
                 </div>
-                    <label for="TypeA">Type :</label>
-                    <input type="number" name="TypeA" value="1" min="0" required>
-                <div class="flex align">
-                    <input type="radio" name="TypeB" value="0" checked>
-                    <label for="0">Appartement</label>
-                    <input type="radio" name="TypeB" value="1">
-                    <label for="1">Maison</label>
+                <label for='TypeA'>Type :
+                    <input class='formSpacer' type='number' name='TypeA' value='$typeA' min='0' required>
+                </label>
+                <div class='flex align formSpacer'>
+                    <label for='TypeB' class='flex'>
+                        <input type='radio' name='TypeB' value='0' $typeB>
+                        <p>Appartement</p>
+                    </label>
+                    <label for='TypeB' class='flex'>
+                        <input type='radio' name='TypeB' value='1' $typeBB>
+                        <p>Maison</p>
+                    </label>
+
                 </div>
-                <input type="submit" value="Rechercher">
+                <input type='submit' value='Rechercher' class='formSpacer'>";
+                if (!empty($_GET)) {
+                    echo "<script>selectform('$department')</script>";
+                }
+                ?>
             </form>
         </div>
         <main>
             <?php
-            require_once "Back/ConnectSQL.php";
-            $sql = "SELECT * FROM building";
-            $result = $link->query($sql);
-            if ($result->num_rows > 0) {
-              // output data of each row
-                while($row = $result->fetch_assoc()) {
-                  $date = date_create($row['date']);
-                  $date = date_format($date, 'd/m/Y');
-                  require_once 'Back/Card.php';
-                  $NewCard = new Card($row['id'], $row['image'], $row['name'], $row['owner'], $date, $row['city'], $row['zip'], $row['adresse'], $row['price'], $row['typea'], $row['typeb']);
-                  $NewCard->loadCard();
+            if (!empty($_GET)){
+                require_once "Back/ConnectSQL.php";
+                $sql = "SELECT * FROM building WHERE department = '$department' AND typeb = '$TypeBNum'";
+                if($typeA != 0){
+                    $sql .= "AND typea = '$typeA'";
+                }
+                if ($priceMax != 0 && $priceMax != ""){
+                    $sql .= "AND price BETWEEN '$priceMin' and '$priceMax'";
+                }
+                $result = $link->query($sql);
+                if ($result->num_rows > 0) {
+                    // output data of each row
+                    while($row = $result->fetch_assoc()) {
+                        $date = date_create($row['date']);
+                        $date = date_format($date, 'd/m/Y');
+                        require_once 'Back/Card.php';
+                        $NewCard = new Card($row['id'], $row['image'], $row['name'], $row['owner'], $date, $row['city'], $row['zip'], $row['adresse'], $row['price'], $row['typea'], $row['typeb']);
+                        $NewCard->loadCard();
+                    }
                 }
             }
-            /*require_once 'Back/Card.php';
-            $NewCard = new Card(0, "User/Lokosse73/20210630.jpg", "ClemVilla","Lokosse73", "04/07/22", "Aix-Les-Bains", 73100, "4 chemin des bauges", 800, 5, "Maison");
-            $NewCard->loadCard();*/
             ?>
         </main>
     </body>
