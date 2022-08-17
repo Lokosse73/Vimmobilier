@@ -38,7 +38,8 @@ class Card{
         <a href=''></a>
         <img class='card-img' src=".$this->Image.">
         <div>
-            <p>$this->City, $this->Zip, $this->Adresse</p>
+            <p>$this->Adresse</p>
+            <p>$this->Zip, $this->City</p>
             <p>$TypeB T$this->TypeA</p>
         </div>
         <div class='card-infoB'>
@@ -46,12 +47,20 @@ class Card{
             <div class='card-price'>
                 <p>$this->Price €</p>
             </div>
-        </div>
-        <div class='flex' >
-            <a><img src='SVG/chat-left.svg' alt='Message'></a>
-            <a onclick='AddFav(511)'><img src='SVG/heart.svg' alt='Favoris'></a>
-        </div>
         </div>";
+        if(isset($_SESSION['email'])){
+            if($_SESSION['username'] == $this->Owner){
+                echo "<a><img src='SVG/trash3.svg' alt='Supprimer'></a>";
+            }else {
+                echo "<div class='flex' >
+                <a><img src='SVG/chat-left.svg' alt='Message'></a>
+                <a onclick='addFav( $this->ID )'><img src='SVG/heart.svg' alt='Favoris'></a>
+                </div>
+                </div>";
+            }
+        }else{
+            echo "</div>";
+        }
 
     }
  }

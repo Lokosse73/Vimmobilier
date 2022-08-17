@@ -85,7 +85,7 @@ if(!empty($_POST)) {
         if(!file_exists("User/".$owner)){
             mkdir("User/".$owner);
         }
-        $path = $_FILES["image"]["name"];
+        $path = uniqid();
         $tmpName = $_FILES["image"]["tmp_name"];
         move_uploaded_file($tmpName, "User/".$owner."/".$path);
         $ImagePath = "User/".$owner."/".$path;
@@ -93,6 +93,11 @@ if(!empty($_POST)) {
         $sql = "INSERT INTO `building`(`image`, `name`, `owner`, `date`, `department`, `city`, `zip`, `adresse`, `price`, `typea`, `typeb`) VALUES 
                 ('$ImagePath','$name','$owner','$date','$department', '$city','$zip','$adresse','$price','$typea','$typeb')";
         $result = $link->query($sql);
+        header('Location: index.php');
+        exit();
+    }
+    if (!empty($_POST['disconnect'])){
+        $_SESSION = array();
         header('Location: index.php');
         exit();
     }
@@ -115,7 +120,10 @@ if(!empty($_POST)) {
                 <a href='message.php'><p>Message</p><img src='SVG/chat-left.svg' alt='Message'></a>
                 <a href='favorites.php'><p>Favoris</p><img src='SVG/heart.svg' alt='Favoris'></a>
                 <a onclick='ShowBuildings()' style='cursor: pointer'><p>Nouveau logement</p><img src='SVG/plus-circle.svg' alt='Nouveau logement'></a>
-                <a href='profile.php'><p>Profile</p><img src='SVG/person.svg' alt='Profile'></a>";
+                <form action='#' method='post' class='flex'>
+                        <input type='hidden' value='disconnect' name='disconnect'>
+                    <a style='cursor: pointer'><input type='submit' value='Déconnection'><img src='SVG/person.svg' alt='Profile'></a>
+                </form>";
         }else{
             echo "<a href='index.php' class='active'><p>Recherche</p><img src='SVG/search.svg' alt='Recherche'></a>
                 <a onclick='ShowLogin()' style='cursor: pointer'><p>Connection</p><img src='SVG/person.svg' alt='Profile'></a>";
